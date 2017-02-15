@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+CLASSPATH="$(for i in lib/*.jar ; do echo -n $i: ; done)src"
+
+echo "Obtaining Java sources list..."
+find . \! -name ".java" | grep \\.java > java_sources.list
+echo "Preparing to translate to iOS-ready Objective-C sources..."
+mkdir -p j2objc_gen/src
+echo "Translating using classpath: `echo $CLASSPATH`."
+j2objc -d j2objc_gen/src -classpath $CLASSPATH @java_sources.list
+echo "Done translating."
+rm java_sources.list
