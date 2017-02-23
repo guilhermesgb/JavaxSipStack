@@ -7,6 +7,7 @@ find . \! -name ".java" | grep \\.java > java_sources.list
 echo "Preparing to translate to iOS-ready Objective-C sources..."
 mkdir -p j2objc_gen/src
 echo "Translating using classpath: `echo $CLASSPATH`."
-j2objc -d j2objc_gen/src -classpath $CLASSPATH @java_sources.list
+#j2objc -d j2objc_gen/src -sourcepath "$CLASSPATH" --no-package-directories --build-closure -g @java_sources.list
+/Users/guilhermesgb/workspace/jfl/ios/j2objc-1.3.1/j2objc -d j2objc_gen/src -sourcepath "$CLASSPATH" --no-package-directories --build-closure -g @java_sources.list
 echo "Done translating."
 rm java_sources.list
